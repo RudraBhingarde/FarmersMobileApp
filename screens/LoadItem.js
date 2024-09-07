@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Import Material Icons
-import FontAwesome from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome Icons
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
+import FontAwesome from 'react-native-vector-icons/FontAwesome'; 
 
-export default function LoadItem({ route, navigation }) {
-  const { image, productName, price, minOrderQty, location } = route.params;
+export default function LoadItem({ route, navigation, onProductNameChange }) {
+  const { image, productName, price, minOrderQty, location, farmerName } = route.params;
+
+  // Send the productName to the parent component (App.js) on mount
+  useEffect(() => {
+    if (onProductNameChange) {
+      onProductNameChange(productName);
+    }
+  }, [productName, onProductNameChange]);
 
   return (
     <ScrollView style={styles.container}>
@@ -16,7 +23,8 @@ export default function LoadItem({ route, navigation }) {
         <Text style={styles.productName}>{productName}</Text>
         <Text style={styles.price}>Price: {price}</Text>
         <Text style={styles.minOrderQty}>Minimum Order Quantity: {minOrderQty}</Text>
-        <Text style={styles.location}>Location: {location}</Text>
+        <Text style={styles.minOrderQty}>By {farmerName},</Text>
+        <Text style={styles.location}>{location}</Text>
 
         <View style={styles.separator} />
 

@@ -26,6 +26,8 @@ import Dashboard from './screens/Dashboard';
 import Transactions from './screens/Transactions';
 import ChatsPage from './screens/chats';
 import LoadItem from './screens/LoadItem';
+import InboxPage from './screens/inbox';
+
 import CategoryItemsPage from './screens/CategoriesItem';
 
 const Stack = createNativeStackNavigator();
@@ -60,19 +62,23 @@ function HomeStack({ navigation }) {
           </Pressable>
         ),
         headerRight: () => (
-          <Pressable onPress={() => alert("Profile opened")} style={{ paddingRight: 10 }}>
+          <Pressable  onPress={() => navigation.navigate('./screens/inbox')} style={{ paddingRight: 10 }}>
             <Ionicons name="notifications-outline" size={25} color='#ffffff' />
           </Pressable>
         ),
       }}
     >
       <Stack.Screen name="Home" component={HomePage} options={{ title: "Welcome" }} />
-      
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Profile" component={ProfilePage} />
       <Stack.Screen name="Categories" component={CategoriesPage} />
       <Stack.Screen name="CategoryItemsPage" component={CategoryItemsPage} />
-      <Stack.Screen name="LoadItem" component={LoadItem} />
+      <Stack.Screen name="Inbox" component={'./screens/inbox'} options={{ title: 'Inbox' }} />
+      
+      <Stack.Screen
+        name="LoadItem"
+        component={LoadItem}
+      />
     </Stack.Navigator>
   );
 }
@@ -104,6 +110,7 @@ function SellerStack({ navigation }) {
       <Stack.Screen name="Dashboard" component={Dashboard} options={{ title: 'Dashboard' }} />
       <Stack.Screen name="Transactions" component={Transactions} options={{ title: 'Transactions' }} />
       <Stack.Screen name="Chats" component={ChatsPage} options={{ title: 'Chats' }} />
+      
     </Stack.Navigator>
   );
 }

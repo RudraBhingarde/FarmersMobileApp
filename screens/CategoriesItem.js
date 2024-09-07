@@ -1,5 +1,3 @@
-// CategoryItemsPage.js
-
 import React from 'react';
 import { SafeAreaView, View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
@@ -23,9 +21,11 @@ export default function CategoryItemsPage({ route, navigation }) {
     return (
       <TouchableOpacity style={styles.itemContainer} onPress={handlePress}>
         <Image source={item.image} style={styles.itemImage} />
-        <Text style={styles.itemName}>{item.productName}</Text>
-        <Text style={styles.itemPrice}>{item.price}</Text>
-        <Text style={styles.itemLocation}>{item.location}</Text>
+        <View style={styles.itemDetails}>
+          <Text style={styles.itemName}>{item.productName}</Text>
+          <Text style={styles.itemPrice}>{item.price}</Text>
+          <Text style={styles.itemLocation}>{item.location}</Text>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -54,32 +54,37 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   itemContainer: {
-    flexDirection: 'column',
+    flexDirection: 'row',  // Change to row layout
     padding: 10,
     marginBottom: 10,
     backgroundColor: '#f8f8f8',
     borderRadius: 5,
     borderColor: '#ddd',
     borderWidth: 1,
+    alignItems: 'center',  // Vertically center image and text
   },
   itemImage: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     borderRadius: 5,
+  },
+  itemDetails: {
+    flex: 1,  // Allow text to take up remaining space
+    marginLeft: 10,  // Add space between image and text
   },
   itemName: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 5,
   },
   itemPrice: {
+    fontWeight:'bold',
     fontSize: 14,
     color: '#888',
-    marginTop: 2,
+    marginTop: 5,
   },
   itemLocation: {
     fontSize: 12,
     color: '#666',
-    marginTop: 1,
+    marginTop: 2,
   },
 });
