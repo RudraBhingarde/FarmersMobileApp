@@ -1,13 +1,17 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Import Material Icons
+import FontAwesome from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome Icons
 
 export default function LoadItem({ route, navigation }) {
   const { image, productName, price, minOrderQty, location } = route.params;
 
   return (
     <ScrollView style={styles.container}>
+      {/* Product Image */}
       <Image source={image} style={styles.productImage} />
-
+      
+      {/* Product Details */}
       <View style={styles.detailsContainer}>
         <Text style={styles.productName}>{productName}</Text>
         <Text style={styles.price}>Price: {price}</Text>
@@ -21,9 +25,18 @@ export default function LoadItem({ route, navigation }) {
           This product is sourced from high-quality farms in {location}. It is grown under optimal conditions to ensure the best quality and freshness. Place your order now and enjoy timely delivery right to your doorstep.
         </Text>
 
-        <TouchableOpacity style={styles.buyButton}>
-          <Text style={styles.buyButtonText}>Order Now</Text>
-        </TouchableOpacity>
+        {/* Button Container with Icons */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buyButton}>
+            <FontAwesome name="shopping-cart" size={20} color="#fff" style={styles.icon} />
+            <Text style={styles.buyButtonText}>Order Now</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.chatButton} onPress={() => navigation.navigate('Chat')}>
+            <Icon name="chat" size={20} color="#fff" style={styles.icon} />
+            <Text style={styles.chatButtonText}>Get Best Price</Text>
+          </TouchableOpacity>
+        </View>
 
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Text style={styles.backButtonText}>Back to Home</Text>
@@ -64,7 +77,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#e74c3c',
+    color: '#96d406',
     marginBottom: 10,
   },
   minOrderQty: {
@@ -94,14 +107,38 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 20,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
   buyButton: {
-    backgroundColor: '#2ecc71',
+    backgroundColor: '#96d406',
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 20,
+    width: '48%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  chatButton: {
+    backgroundColor: '#3498db',
+    paddingVertical: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    width: '48%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  icon: {
+    marginRight: 8,
   },
   buyButtonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  chatButtonText: {
     fontSize: 18,
     color: '#fff',
     fontWeight: 'bold',

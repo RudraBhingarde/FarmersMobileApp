@@ -52,13 +52,13 @@ const SellerPage = ({ navigation, route }) => {
           <Text style={styles.footerText}>Dashboard</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.footerButton}>
+        <TouchableOpacity onPress={() => navigation.navigate('Chats')} style={styles.footerButton}>
           <Icon name="chat-outline" size={24} color='#96d406' />
           <Text style={styles.footerText}>Chats</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
+        <TouchableOpacity onPress={() => navigation.navigate('Transactions')} style={styles.footerButton}>
           <Icon name="account-outline" size={24} color='#96d406' />
-          <Text style={styles.footerText}>Profile</Text>
+          <Text style={styles.footerText}>Transactions</Text>
         </TouchableOpacity>
 
       </View>
@@ -110,6 +110,24 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     marginBottom: 4,
+  },
+  addNewItem:{ 
+    backgroundColor: '#fff',
+    borderColor: '#96d406',
+    borderWidth: 2,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center', // Center elements horizontally
+    flexDirection: 'row', // Arrange icon and text horizontally
+    color:'#96d406',
+    marginBottom: 10, // Ensure some space between the button and the footer
+  },
+  addNewItemText:{
+    fontSize: 18,
+    color: '#96d406',
+    fontWeight: 'bold',
+    
   },
   price: {
     fontSize: 16,
