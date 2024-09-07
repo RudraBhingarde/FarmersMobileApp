@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function CategoryItemsPage({ route, navigation }) {
   const { categoryName, items } = route.params;
@@ -30,9 +31,21 @@ export default function CategoryItemsPage({ route, navigation }) {
     );
   };
 
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: categoryName,
+      headerStyle: { backgroundColor: '#96d406' },
+      headerTitleStyle: { color: '#ffffff' },
+      headerLeft: () => (
+        <Pressable onPress={() => navigation.goBack()} style={{ paddingLeft: 1, paddingRight:7 }}>
+          <Ionicons name="arrow-back-outline" size={25} color="#ffffff" />
+        </Pressable>
+      ),
+    });
+  }, [navigation, categoryName]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>{categoryName}</Text>
       <FlatList
         data={items}
         renderItem={renderProduct}
@@ -54,7 +67,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   itemContainer: {
-    flexDirection: 'row',  // Change to row layout
+    flexDirection: 'column',
     padding: 10,
     marginBottom: 10,
     backgroundColor: '#f8f8f8',
@@ -77,7 +90,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   itemPrice: {
-    fontWeight:'bold',
     fontSize: 14,
     color: '#888',
     marginTop: 5,
